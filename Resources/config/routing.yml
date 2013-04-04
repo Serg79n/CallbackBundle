@@ -1,0 +1,35 @@
+admin_review:
+    pattern:  /reviews
+    defaults: { _controller: "CallbackBundle:Review:index" }
+
+admin_review_edit:
+    pattern:  /reviews/{id}/edit
+    defaults: { _controller: "CallbackBundle:Review:edit" }
+    requirements: 
+      id:  \d+
+
+admin_review_update:
+    pattern:  /reviews/{id}/update
+    defaults: { _controller: "CallbackBundle:Review:update" }
+    requirements: 
+      id:  \d+
+      _method: post
+
+admin_review_delete:
+    pattern:  /reviews/{id}/delete
+    defaults: { _controller: "CallbackBundle:Review:delete" }
+    requirements: 
+      id:  \d+
+      _method: post
+
+admin_review_change_active:
+    pattern:  /reviews/changeActive
+    defaults: { _controller: CallbackBundle:Review:changeActive, active: 0 }
+    
+admin_callback:
+    pattern:  /callback
+    defaults: { _controller: "CallbackBundle:Callback:index" }
+
+admin_callback_change_active:
+    pattern:  /callback/changeActive
+    defaults: { _controller: CallbackBundle:Callback:changeActive, active: 0 }

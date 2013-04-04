@@ -1,0 +1,67 @@
+<?php
+
+//src/Wifinder/CallbackBundle/Entity/Callback.php
+
+namespace Wifinder\CallbackBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+/**
+ * @ORM\Table(name="callback")
+ * @ORM\Entity(repositoryClass="Wifinder\CallbackBundle\Entity\Repository\CallbackRepository")
+ */
+class Callback {
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+    
+    /**
+     * @ORM\Column(type="string", length=225, nullable=true)
+     */
+    protected $first_name;
+    
+    /**
+     * @ORM\Column(type="string", length=225, nullable=true)
+     */
+    protected $middle_name;
+    
+    /**
+     * @ORM\Column(type="string", length=225, nullable=true)
+     */
+    protected $last_name;
+    
+    /**
+     * @ORM\Column(type="string", length=225)
+     */
+    protected $email;
+    
+    /**
+     * @ORM\Column(type="string", length=225)
+     */
+    protected $phone;
+    
+    /**
+     * @ORM\Column(type="text")
+     */
+    protected $callback_text;
+    
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    protected $is_received = true;
+    
+    /**
+     * @var datetime $created
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    protected $created;
+}
