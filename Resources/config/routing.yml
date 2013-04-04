@@ -33,3 +33,49 @@ admin_callback:
 admin_callback_change_active:
     pattern:  /callback/changeActive
     defaults: { _controller: CallbackBundle:Callback:changeActive, active: 0 }
+    
+admin_mailingaddress:
+    pattern:  /mailing
+    defaults: { _controller: "CallbackBundle:MailingAddress:index" }
+
+admin_mailingaddress_new:
+    pattern:  /mailing/new
+    defaults: { _controller: "CallbackBundle:MailingAddress:new" }
+
+admin_mailingaddress_create:
+    pattern:  /mailing/create
+    defaults: { _controller: "CallbackBundle:MailingAddress:create" }
+    requirements: { _method: post }
+
+admin_mailingaddress_edit:
+    pattern:  /mailing/{id}/edit
+    defaults: { _controller: "CallbackBundle:MailingAddress:edit" }
+    requirements: 
+      id:  \d+
+
+admin_mailingaddress_update:
+    pattern:  /mailing/{id}/update
+    defaults: { _controller: "CallbackBundle:MailingAddress:update" }
+    requirements: 
+      id:  \d+
+      _method: post
+
+admin_mailingaddress_delete:
+    pattern:  /mailing/{id}/delete
+    defaults: { _controller: "CallbackBundle:MailingAddress:delete" }
+    requirements: 
+      id:  \d+
+      _method: post
+      
+admin_mailingaddress_change_active:
+    pattern:  /mailing/changeActive
+    defaults: { _controller: CallbackBundle:MailingAddress:changeActive, active: 0 }
+
+admin_mailingaddress_filter:
+    pattern:  /project/filter
+    defaults: { _controller: CallbackBundle:MailingAddress:filter}
+  
+admin_mailingaddress_reset_filter:
+    pattern: /mailing/reset_filter
+    defaults: { _controller: CallbackBundle:MailingAddress:resetFilter}
+  
