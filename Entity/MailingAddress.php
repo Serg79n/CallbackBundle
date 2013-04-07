@@ -217,12 +217,19 @@ class MailingAddress {
     /**
      * Add type
      *
-     * @param \Wifinder\WebItemBundle\Entity\EmailType $type
+     * @param \Wifinder\$targetClassBundle\Entity\EmailType $type
      * @return MailingAddress
      */
-    public function addType(\Wifinder\WebItemBundle\Entity\EmailType $type)
+    public function addType(\Wifinder\CallbackBundle\Entity\EmailType $type)
     {
         $this->type[] = $type;
+    
+        return $this;
+    }
+    
+     public function setType(\Wifinder\CallbackBundle\Entity\EmailType $type)
+    {
+        $this->type = $type;
     
         return $this;
     }
@@ -230,9 +237,9 @@ class MailingAddress {
     /**
      * Remove type
      *
-     * @param \Wifinder\WebItemBundle\Entity\EmailType $type
+     * @param \Wifinder\CallbackBundle\Entity\EmailType $type
      */
-    public function removeType(\Wifinder\WebItemBundle\Entity\EmailType $type)
+    public function removeType(\Wifinder\CallbackBundle\Entity\EmailType $type)
     {
         $this->type->removeElement($type);
     }

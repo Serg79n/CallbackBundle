@@ -16,7 +16,12 @@ class MailingAddressFilterType extends AbstractType
                 'choices' => array(0 => 'No',1 => 'Yes'),
                 'empty_value' => 'Yes or No',
                 'required' => false))
-            ->add('type')
+            ->add('type', 'entity', array(
+                'class' => 'CallbackBundle:EmailType',
+                'property' => 'type',
+                'required' => true,
+                'empty_value' => ' '
+            ))
             ->add('first_name')
             ->add('middle_name')
             ->add('last_name')

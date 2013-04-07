@@ -104,7 +104,7 @@ class MailingAddressController extends Controller {
         $entity->setIsActive(null);
         if ($request->getSession()->has('admin_mailing_filter')) {
             foreach ($request->getSession()->get('admin_mailing_filter') as $i => $one) {
-                if ($one['type'] == 'entity') {
+                if ($one['type'] == 'entity' || $one['type'] == 'collection') {
                     $metadata = $this->getMetadatas('Wifinder\CallbackBundle\Entity\MailingAddress');
                     $targetClass = $metadata->getAssociationTargetClass($i);
                     $one['value'] = $this->getDoctrine()->getManager()->getRepository($targetClass)->find($one['value']);
@@ -112,7 +112,6 @@ class MailingAddressController extends Controller {
                 $entity->set($i, $one['value']);
             }
         }
-        //exit;
         return $entity;
     }
 
@@ -136,11 +135,22 @@ class MailingAddressController extends Controller {
     public function addEntityFilter($field, $value) {
         $metadata = $this->getMetadatas('Wifinder\CallbackBundle\Entity\MailingAddress');
         $targetClass = $metadata->getAssociationTargetClass($field);
-
         $this->query->innerJoin($targetClass, $field);
         $this->query->andWhere($field . '.id = :' . $field);
         $this->query->andWhere(sprintf('c.%s = :%s', $field, $field));
         $this->query->setParameter($field, $value);
+    }
+    
+    public function addCollectionFilter($field, $value){
+        if (strstr($field, '.')) {
+            list($table, $field) = explode('.', $field);
+        } else {
+            $table = $field;
+            $field = 'id';
+        }
+        $this->query->leftJoin('c.'.$table, $table);
+        $this->query->andWhere(sprintf('%s.%s IN (:%s)',$table, $field, $table.'_'.$field));
+        $this->query->setParameter($table.'_'.$field, $value);
     }
 
     protected function getMetadatas($class = null) {

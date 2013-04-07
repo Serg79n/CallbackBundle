@@ -9,7 +9,7 @@
         <thead>
             <tr>
                 <th>{% trans from "admin" %}Email{% endtrans %}</th>
-                <th>{% trans from "admin" %}Name{% endtrans %}</th>
+                <th>{% trans from "admin" %}User name{% endtrans %}</th>
                 <th>{% trans from "admin" %}Type mailing{% endtrans %}</th>
                 <th>{% trans from "admin" %}Is active?{% endtrans %}</th>
                 <th>{% trans from "admin" %}Actions{% endtrans %}</th>
@@ -20,7 +20,13 @@
             <tr>
                 <td>{{ entity.email }}</td>
                 <td>{{ entity.firstName }} {{ entity.middleName }} {{ entity.lastName }}</td>
-                <td>{{ entity.type }}</td>
+                <td>
+                    <ol>
+                    {% for one in entity.type%}
+                       <li>{{ one.type }}</li>
+                    {% endfor %}
+                    </ol>
+                </td>
                 <td>
                     {% include "CallbackBundle:MailingAddress:_labelActive.html.twig" with {'entity':entity} %}
                 </td>
